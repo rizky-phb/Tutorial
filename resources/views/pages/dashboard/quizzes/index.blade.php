@@ -19,6 +19,7 @@
                 <th>Status</th>
                 <th>Name</th>
                 <th>Course</th>
+                <th>Tugas</th>
                 <th>Category</th>
                 <th>Total Question(s)</th>
                 <th>Time Limit</th>
@@ -40,7 +41,12 @@
                             {{ $quiz->course->title }}
                         </a>
                     </td>
-                    <td>{{ $quiz->course->category->name }}</td>
+                    <td>
+                        <a class="text-decoration-none" href="{{ route('tugas.show', optional($quiz->tugas->slug)) }}">
+                            {{ optional($quiz->tugas->title) }}
+                        </a>
+                    </td>
+                    <td>{{ $quiz->course->category->name ?? $quiz->tugas->category->name }}</td>
                     <td>{{ $quiz->questions_count }}</td>
                     <td>{{ $quiz->time_limit ? floor($quiz->time_limit / 60) . ' Menit' : 'No Time' }}</td>
                     <td>{{ $quiz->added_by }}<br>({{ $quiz->created_at }})</td>

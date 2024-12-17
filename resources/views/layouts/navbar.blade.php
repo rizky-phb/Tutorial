@@ -28,7 +28,13 @@
                     <a class="nav-link {{ Request::is('/') ? 'active' : null }} mx-1" href="{{ route('index') }}" aria-current="page">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('materi') ? 'active' : null }} mx-1" href="{{ route('materi.index') }}" aria-current="page">Courses</a>
+                    <a class="nav-link {{ Request::is('materi') ? 'active' : null }} mx-1" href="{{ route('materi.index') }}" aria-current="page">Materi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('list-tugas') ? 'active' : null }} mx-1" href="{{ route('list-tugas.index') }}" aria-current="page">Tugas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('materi') ? 'active' : null }} mx-1" href="{{ route('materi.pagequiz') }}" aria-current="page">Kuis</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('favorites') ? 'active' : null }} mx-1" href="{{ route('favorites.index') }}">Favorit</a>

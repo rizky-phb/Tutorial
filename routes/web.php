@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\TugasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\FavoriteController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardUsersController;
 use App\Http\Controllers\DashboardCoursesController;
+use App\Http\Controllers\DashboardTugasController;
 use App\Http\Controllers\DashboardQuizzesController;
 use App\Http\Controllers\DashboardCategoriesController;
 
@@ -34,6 +36,7 @@ use App\Http\Controllers\DashboardCategoriesController;
 
 //MateriController
 Route::get('materi/search', [MateriController::class, 'search'])->name('materi.search');
+Route::get('tugas/search', [TugasController::class, 'search'])->name('tugas.search');
 
 Route::middleware(['guest'])->group(function () {
     //LoginController
@@ -54,8 +57,12 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'not_admin'])->group(function () {
+    //page quiz
+    Route::get('pagequiz', [MateriController::class, 'pagequiz'])->name('materi.pagequiz');
     //MateriController
     Route::resource('materi', MateriController::class);
+    //TugasController
+    Route::resource('list-tugas', TugasController::class);
     //FavoriteController
     Route::resource('favorites', FavoriteController::class)->except('show');
     //ActivityController
@@ -89,6 +96,8 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('dashboard/quizzes/question/{quizQuestion}', [DashboardQuizzesController::class, 'destroyQuestions'])->name('quizzes.destroyQuestions');
     //DashboardCoursesController
     Route::resource('dashboard/courses', DashboardCoursesController::class);
+    //DashboardTugasController
+    Route::resource('dashboard/tugas', DashboardTugasController::class);
     //DashboardCategoriesController
     Route::resource('dashboard/categories', DashboardCategoriesController::class);
 });

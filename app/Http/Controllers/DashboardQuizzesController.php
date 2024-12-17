@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\Course;
+use App\Models\Tugas;
 use App\Models\QuizAnswer;
 use App\Models\QuizQuestion;
 use App\Http\Requests\DashboardQuizzesRequest;
@@ -29,7 +30,8 @@ class DashboardQuizzesController extends Controller
     {
         return view('pages.dashboard.quizzes.quiz-form', [
             'title' => 'Add New Quiz',
-            'courses' => Course::with('category')->get()
+            'courses' => Course::with('category')->get(),
+            'tugas' => Tugas::with('category')->get()
         ]);
     }
 
@@ -101,7 +103,8 @@ class DashboardQuizzesController extends Controller
         return view('pages.dashboard.quizzes.quiz-form', [
             'title' => 'Edit Quiz',
             'quiz' => $quiz,
-            'courses' => Course::with('category')->get()
+            'courses' => Course::with('category')->get(),
+            'tugas' => Tugas::with('category')->get()
         ]);
     }
 

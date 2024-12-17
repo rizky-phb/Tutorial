@@ -15,29 +15,13 @@ class MateriController extends Controller
     public function index()
     {
         $courses = Course::where('draft', false)
+            ->with('category', 'quiz')
             ->search(request('search'))
             ->category(request('category'))
             ->sort(request('sort'))
             ->paginate(9)
             ->withQueryString();
         return view('pages.materi.index', [
-            'title' => 'Materi',
-            'courses' => $courses,
-            'categories' => Category::get()
-        ]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
-    public function pagequiz()
-    {
-        $courses = Course::where('draft', false)
-            ->search(request('search'))
-            ->category(request('category'))
-            ->sort(request('sort'))
-            ->paginate(9)
-            ->withQueryString();
-        return view('pages.materi.page-quiz', [
             'title' => 'Materi',
             'courses' => $courses,
             'categories' => Category::get()

@@ -60,6 +60,37 @@
                 {{ $message }}
             </div>
         @enderror
+        <div class="mt-4">
+            <?php $x = 0; ?>
+            <label class="form-label">Tugas</label>
+            <select class="form-select" id="tugas" name="tugas_id" required>
+                <option selected>Pilih tugas...</option>
+                @if (isset($quiz))
+                    <option value="{{ $quiz->tugas->id }}" selected>
+                        {{ $quiz->tugas->title }} - {{ $quiz->tugas->category->name }}
+                    </option>
+                    <?php $x++; ?>
+                @endif
+                @foreach ($tugas as $t)
+                    @if ($t->quiz)
+                        @continue
+                    @else
+                        <option value="{{ $t->id }}" {{ old('tugas_id') == $t->id ? 'selected' : (isset($quiz) && $quiz->t->id == $t->id ? 'selected' : '') }}>
+                            {{ $t->title }} - {{ $t->category->name }}
+                        </option>
+                        <?php $x++; ?>
+                    @endif
+                @endforeach
+                @if ($x == 0)
+                    <option selected>Tidak ada tugas yang belum memiliki quiz, silahkan tambahkan tugas baru untuk menambah quiz</option>
+                @endif
+            </select>
+        </div>
+        @error('tugas_id')
+            <div class="text-danger error-message text-start">
+                {{ $message }}
+            </div>
+        @enderror
         @php
             $time_minutes = isset($quiz) && $quiz->time_limit ? floor(($quiz->time_limit % 3600) / 60) : null;
             $time_hours = isset($quiz) && $quiz->time_limit ? floor($quiz->time_limit / 3600) : null;

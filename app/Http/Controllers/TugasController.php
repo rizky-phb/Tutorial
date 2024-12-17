@@ -2,44 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
+use App\Models\Tugas;
 use App\Models\Activity;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class MateriController extends Controller
+class TugasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $courses = Course::where('draft', false)
+        $tugas = Tugas::where('draft', false)
+            ->with('category', 'quiz')
             ->search(request('search'))
             ->category(request('category'))
             ->sort(request('sort'))
             ->paginate(9)
             ->withQueryString();
-        return view('pages.materi.index', [
-            'title' => 'Materi',
-            'courses' => $courses,
-            'categories' => Category::get()
-        ]);
-    }
-    /**
-     * Display a listing of the resource.
-     */
-    public function pagequiz()
-    {
-        $courses = Course::where('draft', false)
-            ->search(request('search'))
-            ->category(request('category'))
-            ->sort(request('sort'))
-            ->paginate(9)
-            ->withQueryString();
-        return view('pages.materi.page-quiz', [
-            'title' => 'Materi',
-            'courses' => $courses,
+        return view('pages.tugas.index', [
+            'title' => 'tugas',
+            'tugas' => $tugas,
             'categories' => Category::get()
         ]);
     }
@@ -65,32 +49,32 @@ class MateriController extends Controller
      */
     public function show($slug)
     {
-        $course = Course::where('slug', $slug)->with('quiz')->firstOrFail();
-        if ($course->draft) {
-            return redirect(route('materi.index'))
+        $tugas = Tugas::where('slug', $slug)->with('quiz')->firstOrFail();
+        if ($tugas->draft) {
+            return redirect(route('tugas.index'))
                 ->with('alert', 'info')
-                ->with('html', "Materi <strong>{$course->title}</strong> belum dapat diakses untuk saat ini.");
+                ->with('html', "Tugas <strong>{$tugas->title}</strong> belum dapat diakses untuk saat ini.");
         }
         Activity::updateOrInsert(
             [
                 'user_id' => auth()->user()->id,
-                'course_id' => $course->id
+                'tugas_id' => $tugas->id
             ],
             [
                 'status' => 'study',
                 'updated_at' => now()
             ]
         );
-        return view('pages.materi.show', [
-            'title' => $course->title,
-            'course' => $course
+        return view('pages.tugas.show', [
+            'title' => $tugas->title,
+            'tugas' => $tugas
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course)
+    public function edit(Tugas $tugas)
     {
         //
     }
@@ -98,7 +82,7 @@ class MateriController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, Tugas $tugas)
     {
         //
     }
@@ -106,7 +90,7 @@ class MateriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy(Tugas $tugas)
     {
         //
     }
@@ -116,7 +100,7 @@ class MateriController extends Controller
      */
     public function search(Request $request)
     {
-        $titles = Course::select('title')
+        $titles = Tugas::select('title')
             ->where('draft', false)
             ->where('title', 'LIKE', "%$request->keyword%")
             ->limit(5)

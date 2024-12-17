@@ -29,7 +29,7 @@
                         <div class="ml-5">
                             <form id="quiz_radio" action="{{ route('quiz.store') }}" method="POST">
                                 <input name="question_id" type="hidden" value="{{ $question->id }}">
-                                <input name="quiz_id" type="hidden" value="{{ $course->quiz->id }}">
+                                <input name="quiz_id" type="hidden" value="{{ $course->quiz->id??$tugas->quiz->id }}">
                                 <div class="radio-container">
                                     @foreach ($question->answers as $option)
                                         <label>
@@ -40,7 +40,7 @@
                                 </div>
                             </form>
                             <br>
-                            <span class="flag_toggle" data-bs-placement="right" data-bs-toggle="tooltip" data-bs-title="Tandai pertanyaan ini jika kamu ingin mengerjakannya nanti" data-quiz-id="{{ $course->quiz->id }}" data-question-id="{{ $question->id }}" data-url="{{ route('quiz.flag', [$course->quiz->id, $question->id]) }}
+                            <span class="flag_toggle" data-bs-placement="right" data-bs-toggle="tooltip" data-bs-title="Tandai pertanyaan ini jika kamu ingin mengerjakannya nanti" data-quiz-id="{{ $course->quiz->id??$tugas->quiz->id }}" data-question-id="{{ $question->id }}" data-url="{{ route('quiz.flag', [$course->quiz->id??$tugas->quiz->id, $question->id]) }}
                                 " style="cursor: pointer;">
                                 <i class="flag_icon ti ti-flag{{ $flag ? '-filled text-danger' : '' }}"></i>
                                 <span class="flag_text">{{ $flag ? 'Remove flag' : 'Flag question' }}</span>
@@ -51,10 +51,10 @@
                                 <a class="btn btn-dark {{ $questions->currentPage() == 1 ? 'opacity-0 disabled' : '' }}" id="prev" href="{{ $questions->previousPageUrl() }}"><i class="ti ti-chevron-left"></i>
                                     Previous</a>
                                 @if ($questions->currentPage() == $questions->total())
-                                    <form id="finish" action="{{ route('quiz.update', $course->quiz->id) }}" method="POST">
+                                    <form id="finish" action="{{ route('quiz.update', $course->quiz->id??$tugas->quiz->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
-                                        <button class="finish-attempt btn btn-dark" data-url="{{ route('quiz.check', $course->quiz->id) }}" type="submit"><i class="ti ti-circle-check"></i> Finish Attempt</button>
+                                        <button class="finish-attempt btn btn-dark" data-url="{{ route('quiz.check', $course->quiz->id??$tugas->quiz->id) }}" type="submit"><i class="ti ti-circle-check"></i> Finish Attempt</button>
                                     </form>
                                 @else
                                     <a class="btn btn-dark" id="next" href="{{ $questions->nextPageUrl() }}">Next <i class="ti ti-chevron-right"></i></a>
@@ -67,13 +67,13 @@
             <div class="col-md-4">
                 <div class="sidebar">
                     <h3 class="quiz-nav">Quiz Navigation</h3>
-                    @if ($course->quiz->time_limit)
+                    @if ($course->quiz->time_limit??$tugas->quiz->time_limit)
                         <div id="countdown" data-timer="{{ $time_left }}"></div>
                     @endif
-                    <form action="{{ route('quiz.update', $course->quiz->id) }}" method="POST">
+                    <form action="{{ route('quiz.update', $course->quiz->id??$tugas->quiz->id) }}" method="POST">
                         @csrf
                         @method('PATCH')
-                        <span class="finish-attempt" data-url="{{ route('quiz.check', $course->quiz->id) }}" style="cursor: pointer;" x-data="{ hover: false }" x-on:mouseenter="hover = true" x-on:mouseleave="hover = false" x-bind:class="hover ? 'text-success' : ''">
+                        <span class="finish-attempt" data-url="{{ route('quiz.check', $course->quiz->id??$tugas->quiz->id) }}" style="cursor: pointer;" x-data="{ hover: false }" x-on:mouseenter="hover = true" x-on:mouseleave="hover = false" x-bind:class="hover ? 'text-success' : ''">
                             <i x-bind:class="hover ? 'ti ti-circle-check' : ''"></i>
                             Finish attempt...
                         </span>
@@ -105,7 +105,7 @@
                                     $border = '';
                                 }
                             @endphp
-                            <a class="quiz-nav-button btn btn-{{ $border }}{{ $background }} btn-sm" href="{{ $course->slug }}?page={{ $loop->iteration }}">{{ $loop->iteration }}</a>
+                            <a class="quiz-nav-button btn btn-{{ $border }}{{ $background }} btn-sm" href="{{ $course->slug??$tugas->slug }}?page={{ $loop->iteration }}">{{ $loop->iteration }}</a>
                         @endforeach
                     </div>
                 </div>

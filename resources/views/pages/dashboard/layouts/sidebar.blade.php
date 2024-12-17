@@ -21,6 +21,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link d-flex {{ Request::is('dashboard/tugas*') ? 'active' : '' }} gap-2" href="{{ route('tugas.index') }}">
+                    <i class="ti ti-book fs-5"></i>Tugas
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link d-flex {{ Request::is('dashboard/quizzes*') ? 'active' : '' }} gap-2" href="{{ route('quizzes.index') }}">
                     <i class="ti ti-checklist fs-5"></i>Quizzez
                 </a>

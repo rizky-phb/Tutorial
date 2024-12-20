@@ -97,7 +97,9 @@ Route::middleware(['admin'])->group(function () {
     //DashboardCoursesController
     Route::resource('dashboard/courses', DashboardCoursesController::class);
     //DashboardTugasController
-    Route::resource('dashboard/tugas', DashboardTugasController::class);
+    Route::resource('dashboard/tugas', DashboardTugasController::class)->parameters([
+        'tugas' => 'tugas',
+    ]);
     //DashboardCategoriesController
     Route::resource('dashboard/categories', DashboardCategoriesController::class);
 });

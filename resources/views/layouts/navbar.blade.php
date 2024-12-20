@@ -11,9 +11,20 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbarCollapse">
-            @if (!Request::is('materi'))
+            @if (!Request::is('list-tugas'))
                 <ul class="navbar-nav">
                     <form action="{{ route('materi.index') }}" method="GET" id="filterForm">
+                        <div class="input-group m-auto">
+                            <input class="form-control" id="searchBar" name="search" type="search" value="{{ request('search') }}" autocomplete="off" placeholder="Mau belajar apa hari ini?" required>
+                            <button class="input-group-text text-dark" id="navbarSubmit" type="submit">
+                                <i class="ti ti-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </ul>
+            @else
+                <ul class="navbar-nav">
+                    <form action="{{ route('list-tugas.index') }}" method="GET" id="filterForm">
                         <div class="input-group m-auto">
                             <input class="form-control" id="searchBar" name="search" type="search" value="{{ request('search') }}" autocomplete="off" placeholder="Mau belajar apa hari ini?" required>
                             <button class="input-group-text text-dark" id="navbarSubmit" type="submit">

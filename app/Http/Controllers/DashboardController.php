@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Tugas;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         return view('pages.dashboard.index', [
             'title' => 'Bidji Course | Dashboard',
             'courses' => Course::count(),
+            'jml-tugas' => Tugas::count(),
             'categories' => Category::count(),
             'admins' => User::where('is_admin', true)->count(),
             'students' => User::where('is_admin', false)->count(),

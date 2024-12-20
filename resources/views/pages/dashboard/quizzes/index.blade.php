@@ -19,7 +19,6 @@
                 <th>Status</th>
                 <th>Name</th>
                 <th>Course</th>
-                <th>Tugas</th>
                 <th>Category</th>
                 <th>Total Question(s)</th>
                 <th>Time Limit</th>
@@ -39,11 +38,6 @@
                     <td>
                         <a class="text-decoration-none" href="{{ route('courses.show', $quiz->course->slug) }}">
                             {{ $quiz->course->title }}
-                        </a>
-                    </td>
-                    <td>
-                        <a class="text-decoration-none" href="{{ route('tugas.show', $quiz->tugas->slug??'' ) }}">
-                            {{ $quiz->tugas->title??'' }}
                         </a>
                     </td>
                     <td>{{ $quiz->course->category->name ?? $quiz->tugas->category->name }}</td>

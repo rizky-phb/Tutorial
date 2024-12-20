@@ -3,13 +3,11 @@
         <div class="text-md-start container mt-5 text-center">
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <div class="mb-4">
-                        <a class="navbar-brand" href="{{ route('index') }}">
-                            <img src="/img/assets/Bidji Logo.svg" width="60" height="auto">
-                        </a>
-                    </div>
+                <h6 class="text-uppercase fw-bold mb-4">
+                Ruang_Belajar
+                    </h6>
                     <p>
-                        📚 Bidji Course adalah sebuah website pembelajaran untuk siswa-siswi Indonesia terutama siswa-siswi sekolah SD, SMP, SMA, SMK sederajat. Bidji Course menyediakan berbagai macam materi dan video pembelajaran yang dapat diakses secara gratis!
+                        adalah sebuah website pembelajaran untuk siswa-siswi Indonesia terutama siswa-siswi sekolah SD, SMP, SMA, SMK sederajat. Bidji Course menyediakan berbagai macam materi dan video pembelajaran yang dapat diakses secara gratis!
                     </p>
                 </div>
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -64,7 +62,5 @@
             </div>
         </div>
     </section>
-    <div class="p-4 text-center" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2023 Copyright: Bidji Course
-    </div>
+
 </footer>

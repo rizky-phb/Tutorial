@@ -123,7 +123,11 @@ class DashboardTugasController extends Controller
   public function destroy(Tugas $tugas)
   {
     $tugas->delete();
-    unlink(public_path($tugas->cover));
+    if (str_contains($tugas->cover, "https://")) {
+      // Tidak melakukan apa-apa jika mengandung "https://"
+  } else {
+      unlink(public_path($tugas->cover));
+  }
     return redirect(route('tugas.index'))
       ->with('alert', 'success')
       ->with('html', 'Tugas <strong>' . $tugas->title . '</strong> berhasil dihapus!');

@@ -123,7 +123,11 @@ class DashboardCoursesController extends Controller
   public function destroy(Course $course)
   {
     $course->delete();
-    unlink(public_path($course->cover));
+    if (str_contains($course->cover, "https://")) {
+      // Tidak melakukan apa-apa jika mengandung "https://"
+  } else {
+      unlink(public_path($course->cover));
+  }
     return redirect(route('courses.index'))
       ->with('alert', 'success')
       ->with('html', 'Course <strong>' . $course->title . '</strong> berhasil dihapus!');

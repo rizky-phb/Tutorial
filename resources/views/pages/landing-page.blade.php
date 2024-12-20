@@ -167,7 +167,7 @@
                 <a class="btn btn-dark mx-5 text-white" href="{{ route('materi.index') }}">Mulai Belajar</a>
             </div>
             <div class="col-md-5">
-                <img src="/img/assets/jumbo.svg" width="500" height="500">
+                <img src="/img/assets/dora.jpg" width="400" height="400" loading="lazy" style="margin-bottom:100px">
             </div>
         </div>
         <div class="d-flex row gap-4 text-center">

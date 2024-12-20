@@ -59,6 +59,7 @@ class DashboardTugasController extends Controller
    */
   public function show(Tugas $tugas)
   {
+    var_dump($tugas->title);
     return view('pages.dashboard.tugas.show', [
       'title' => $tugas->title,
       'tugas' => $tugas
@@ -123,7 +124,7 @@ class DashboardTugasController extends Controller
   public function destroy(Tugas $tugas)
   {
     $tugas->delete();
-    unlink(public_path($tugas->cover));
+    unlink(public_path($tugas->cover))??"";
     return redirect(route('tugas.index'))
       ->with('alert', 'success')
       ->with('html', 'Tugas <strong>' . $tugas->title . '</strong> berhasil dihapus!');

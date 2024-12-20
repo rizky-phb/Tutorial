@@ -42,7 +42,7 @@
         <i class="ti ti-arrow-back-up"></i> Back
       </a>
       @if (isset($tugas))
-        <a class="btn btn-sm btn-primary" href="{{ route('tugas.show', $tugas->slug) }}">
+        <a class="btn btn-sm btn-primary" href="{{ route('list-tugas.show', $tugas->slug) }}">
           <i class="ti ti-eye"></i> Preview
         </a>
         <form action="{{ route('tugas.destroy', $tugas->slug) }}" method="POST">

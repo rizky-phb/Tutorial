@@ -100,8 +100,7 @@
                     ->exists();
               @endphp
               @if ($course->quiz && $course->quiz->status == 'Published')
-              <span class="badge bg-success" data-bs-toggle="tooltip" data-bs-title="Ada quiz pada materi ini" style="font-size: 11px; cursor: help;">Quiz</span>
-            
+             
               <div class="col">
                 <div class="card h-100 shadow-sm" x-data="{ favorite: {{ $favorited ? 'true' : 'false' }}, show: false }">
                   <img class="rounded-top" src="{{ $course->cover }}" alt="{{ $course->title }}" style="object-fit: cover;
@@ -114,7 +113,7 @@
                     <h4 class="card-title d-flex align-items-center gap-2">
                       {{ $course->title }}
                         <span class="badge bg-success" data-bs-toggle="tooltip" data-bs-title="Ada quiz pada materi ini" style="font-size: 11px; cursor: help;">Quiz</span>
-                     
+
                     </h4>
                     <p class="card-text">{{ $course->desc }}</p>
                   </div>

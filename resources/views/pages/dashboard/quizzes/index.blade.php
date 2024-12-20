@@ -42,8 +42,8 @@
                         </a>
                     </td>
                     <td>
-                        <a class="text-decoration-none" href="{{ route('tugas.show', optional($quiz->tugas->slug)) }}">
-                            {{ optional($quiz->tugas->title) }}
+                        <a class="text-decoration-none" href="{{ route('tugas.show', $quiz->tugas->slug??'' ) }}">
+                            {{ $quiz->tugas->title??'' }}
                         </a>
                     </td>
                     <td>{{ $quiz->course->category->name ?? $quiz->tugas->category->name }}</td>
